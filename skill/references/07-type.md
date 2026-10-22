@@ -19,7 +19,7 @@ const CHAR_IN = [
   { opacity: 0, transform: 'translateY(16px) rotate(4deg)' },
   { opacity: 1, transform: 'translateY(0) rotate(0deg)' }
 ];
-const WIPE = [{ backgroundSize: '0% 38%', color: '#121212' }, { backgroundSize: '100% 38%', color: '#ffffff' }];
+const WIPE = [{ backgroundSize: '0% 100%', color: '#121212' }, { backgroundSize: '100% 100%', color: '#ffffff' }];
 function playType() {
   (running.get('type') || []).forEach(a => a.cancel());
   const anims = chars.map((span, i) => span.animate(CHAR_IN, { duration: RM ? 0 : 480, delay: RM ? 0 : i * CHAR_STEP, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'both' }));

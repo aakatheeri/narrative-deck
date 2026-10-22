@@ -503,8 +503,8 @@ const CHAR_IN = [
 ];
 
 const WIPE = [
-  { backgroundSize: '0% 38%', color: '#121212' },
-  { backgroundSize: '100% 38%', color: '#ffffff' }
+  { backgroundSize: '0% 100%', color: '#121212' },
+  { backgroundSize: '100% 100%', color: '#ffffff' }
 ];
 
 function playType() {

@@ -1,6 +1,6 @@
 # narrative-deck
 
-**Live demo:** https://YOURNAME.github.io/narrative-deck/
+**Live demo:** https://aakatheeri.github.io/narrative-deck/
 
 narrative-deck is not a deck generator and does not produce PDF, PPTX, or slide exports; it is a reference page plus implementation patterns for narrative web effects.
 
@@ -28,14 +28,60 @@ Open [`docs/index.html`](docs/index.html). Module 00 explains the nine-beat stor
 
 ## I want to build with them
 
-Use `skill/SKILL.md` as the agent entry point, then read `skill/references/`. The reference files are terse specifications with implementation snippets lifted from the live demo. Templates in `templates/` map nine beats to pitch, explainer, and report structures.
+For manual use, give your assistant `skill/SKILL.md` as the entry point and keep `skill/references/` available beside it. The reference files are terse specifications with implementation snippets lifted from the live demo. Templates in `templates/` map nine beats to pitch, explainer, and report structures.
 
 ### Install and use the skill
 
-1. Copy the `skill/` folder into your agent's skills directory as `narrative-deck`.
-2. Keep `skill/SKILL.md` as the entry file and `skill/references/` beside it.
-3. In your project prompt, ask the agent to use the `narrative-deck` skill before writing code.
-4. Give the agent your story type, target reader, source material, and which beat needs help.
+This repository includes the Narrative Deck agent skill in `skill/`. Use it with Claude Code, Cursor, Codex, Cline, or any AI-assistant tool that can load skills, rules, or project instructions.
+
+#### With `npx skills`
+
+For supported agents, start the interactive installer:
+
+```sh
+npx skills add aakatheeri/narrative-deck
+```
+
+To target supported agents directly:
+
+```sh
+npx skills add aakatheeri/narrative-deck --agent claude-code cursor
+```
+
+Then ask your assistant:
+
+```text
+Use the narrative-deck skill to turn this material into a nine-beat interactive article.
+Keep it vanilla HTML/CSS/JS and use no more than three effects.
+```
+
+#### Manual install
+
+If your tool does not support `npx skills`, copy this repo's `skill/` folder manually:
+
+```sh
+git clone https://github.com/aakatheeri/narrative-deck.git
+mkdir -p skills
+cp -R narrative-deck/skill skills/narrative-deck
+```
+
+Then move `skills/narrative-deck` into the skills, rules, or project-context location your AI assistant uses.
+
+Keep these files together:
+
+```text
+narrative-deck/
+  SKILL.md
+  references/
+```
+
+#### Tool notes
+
+- **Claude Code:** use `npx skills add aakatheeri/narrative-deck`, or target Claude Code directly with `--agent claude-code`.
+- **Cursor:** use `npx skills add aakatheeri/narrative-deck --agent cursor`, or add `skill/SKILL.md` and `skill/references/` as project context.
+- **Codex:** add `skill/SKILL.md` as the instruction entry point and keep `skill/references/` available beside it.
+- **Cline:** add `skill/SKILL.md` as the instruction entry point and let it read only the reference files for the chosen effects.
+- **Other agents:** give the assistant `SKILL.md` first, then let it pull the reference files it needs.
 
 Useful prompts:
 
@@ -68,4 +114,4 @@ Avoid prompts:
 - `skill/SKILL.md` stays user-supplied.
 - Each reference file stays under 400 words.
 
-MIT licensed, copyright 2026 YOURNAME.
+MIT licensed, copyright 2026 Ahmed Alkatheeri.

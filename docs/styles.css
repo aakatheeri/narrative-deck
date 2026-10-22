@@ -133,6 +133,21 @@ kbd{
   color:#443f38;
 }
 
+.maker-callout{
+  margin-top:0;
+  border-top:0;
+  padding:64px 0 72px;
+}
+
+.maker-callout h2{max-width:620px}
+
+.maker-callout p:not(.tag){
+  font-size:1.05rem;
+  margin:14px 0 0;
+}
+
+.maker-callout .why{margin-bottom:0}
+
 .demo{
   border:1px solid var(--rule);
   background:#fff;
@@ -428,7 +443,7 @@ input[type=range]:focus-visible{outline:3px solid var(--accent2);outline-offset:
 
 /* Resting state only. The wipe is driven by WAAPI keyframes. */
 .highlight{
-  background:linear-gradient(var(--accent),var(--accent)) no-repeat left bottom/0% 38%;
+  background:linear-gradient(var(--accent),var(--accent)) no-repeat left bottom/0% 100%;
   padding:0 2px;
 }
 
@@ -526,6 +541,12 @@ footer{
   font-family:var(--sans);
   font-size:.78rem;
   color:var(--muted);
+}
+
+.maker-callout a,
+footer a{
+  color:var(--accent);
+  text-underline-offset:3px;
 }
 
 /* ---------- 15 RESPONSIVE + A11Y ---------- */
