@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- 1. Document title -->
+<title>Fifteen Storytelling Effects — Interactive Demo</title>
+
+<!-- 2. Meta description -->
+<meta name="description" content="Fifteen interactive storytelling effects used in premium online journalism, each with a live demo, a plain-language explanation, and a replay control.">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="layer l1" data-depth="0.25"></div>
+  <div class="layer l2" data-depth="0.45"></div>
+  <div class="layer l3" data-depth="0.12"></div>
+  <div>
+    <p>Interactive Demonstration</p>
+    <h1>Fifteen Effects That<br>Hold a Reader</h1>
+  </div>
+  <div class="scrollcue">SCROLL ↓</div>
+</header>
+
+<main class="wrap">
+
+ <!-- ============ 00 — STRUCTURAL FRAME ============ -->
+<section class="mod first" id="m0">
+  <p class="tag">Before the effects</p>
+  <h2>The Structural Frame</h2>
+  <p class="reveal dropcap">Fifteen techniques are useless without a skeleton to hang them on. This is the beat sequence underneath a premium article — nine positions, each with a job. Click any beat to see what belongs there and which effects serve it.</p>
+  <div class="why reveal"><b>Why this comes first:</b> A hook's authority ends the moment it opens the loop. Everything after that is structure. Most web writing fails not at the opener but at beat four, where the reader's initial curiosity has been spent and nothing has replaced it.</div>
+
+  <div class="demo">
+    <div class="demo-label">Live — click a beat, or let the tour run</div>
+
+    <div class="beat-rail" id="beatRail"></div>
+
+    <div class="beat-detail" id="beatDetail">
+      <div class="beat-pos" id="beatPos">—</div>
+      <h3 class="beat-name" id="beatName">—</h3>
+      <p class="beat-job" id="beatJob">—</p>
+      <div class="beat-serves">
+        <span class="beat-serves-cap">Effects that serve this beat</span>
+        <div class="beat-chips" id="beatChips"></div>
+      </div>
+    </div>
+
+    <div class="beat-principle" id="beatPrinciple">
+      <b>Principle:</b> <span id="beatPrincipleText">—</span>
+    </div>
+
+    <div class="replaybar">
+      <button class="replay" data-replay="structure">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+        Replay beat tour
+      </button>
+      <span class="replay-note">Walks all nine positions in narrative order</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============ 01 — SCROLL REVEAL ============ -->
+<section class="mod" id="m1">
+  <p class="tag">Effect 01</p>
+  <h2>Scroll-Triggered Reveal</h2>
+  <p class="reveal dropcap">Elements stay invisible until they enter the viewport, then fade and rise into place. An <code>IntersectionObserver</code> watches each block and adds a class — no scroll listener, no jank.</p>
+  <div class="why reveal"><b>Why it hooks:</b> Movement at the edge of vision triggers an orienting response. The reader's scroll <em>caused</em> the reveal, creating a reward loop that pulls the thumb down again.</div>
+
+  <div class="demo">
+    <div class="demo-label">Live — staggered children</div>
+    <div class="stagger" id="stagger1">
+      <p class="sg"><b>Panel one</b> arrives first.</p>
+      <p class="sg"><b>Panel two</b> follows at 180&nbsp;ms.</p>
+      <p class="sg last"><b>Panel three</b> closes the sequence.</p>
+    </div>
+    <div class="replaybar">
+      <button class="replay" data-replay="reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+        Replay reveal
+      </button>
+      <span class="replay-note">Resets opacity + transform, then re-triggers</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 — SCROLLYTELLING ============ -->
+<section class="mod" id="m2">
+  <p class="tag">Effect 02</p>
+  <h2>Sticky Scrollytelling</h2>
+  <p class="reveal">One visual pins to the viewport while text panels scroll past it. Each panel swaps the graphic's state — the scroll becomes a projector.</p>
+  <div class="why reveal"><b>Why it hooks:</b> The reader controls pacing. Variable formats stop attention from decaying, and each gesture produces visible change.</div>
+
+  <div class="scrolly">
+    <div class="sticky-viz">
+      <canvas id="viz" width="520" height="520" aria-label="Animated data visualisation"></canvas>
+    </div>
+    <div class="steps">
+      <div class="step" data-state="0"><b>Step 01 — Baseline</b>Twelve data points sit at resting value. Nothing has happened yet.</div>
+      <div class="step" data-state="1"><b>Step 02 — Divergence</b>Scroll further and the series splits. Colour now carries meaning.</div>
+      <div class="step" data-state="2"><b>Step 03 — Focus</b>Everything dims except the outlier. Attention is directed, not requested.</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ============ 03 — HOVER DISCLOSURE ============ -->
+<section class="mod" id="m3">
+  <p class="tag">Effect 03</p>
+  <h2>Hover Disclosure</h2>
+  <p class="reveal">Detail lives one gesture away. Hover reveals hidden content without cluttering the default view.</p>
+  <div class="why reveal"><b>Why it hooks:</b> Curiosity is rewarded on demand. Density rises only for readers who want it.</div>
+
+  <div class="demo">
+    <div class="demo-label">Live — hover or tab to any column</div>
+    <div class="bars" id="bars"></div>
+    <div class="replaybar">
+      <button class="replay" data-replay="bars">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+        Replay growth
+      </button>
+      <span class="replay-note">Drops bars to zero, re-staggers upward</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 — YOU DRAW IT ============ -->
+<section class="mod" id="m4">
+  <p class="tag">Effect 04</p>
+  <h2>“You Draw It” Canvas</h2>
+  <p class="reveal">Drag across the blank half of the chart to predict the trend. Release, then reveal the truth.</p>
+  <div class="why reveal"><b>Why it hooks:</b> Commitment bias plus the generation effect. Once you've drawn a guess you have stakes, and the reveal lands emotionally.</div>
+
+  <div class="demo">
+    <div class="demo-label">Live — drag inside the shaded zone</div>
+    <div id="drawWrap"><canvas id="draw" aria-label="Draw your prediction"></canvas></div>
+    <div class="btnrow">
+      <button class="act" id="revealBtn">Reveal actual</button>
+    </div>
+    <div id="verdict" role="status" aria-live="polite"></div>
+    <div class="replaybar">
+      <button class="replay" data-replay="draw">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+        Replay / clear guess
+      </button>
+      <span class="replay-note">Clears your line and the revealed answer</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 — PHYSICS FIELD ============ -->
+<section class="mod" id="m5">
+  <p class="tag">Effect 05</p>
+  <h2>Physics Field (Canvas)</h2>
+  <p class="reveal">Orbs with a simple physics simulation respond to the cursor. The same engine can push body text aside in magazine-style layouts.</p>
+  <div class="why reveal"><b>Why it hooks:</b> Responsiveness implies aliveness. A surface that reacts feels authored for you specifically.</div>
+
+  <div class="demo">
+    <div class="demo-label">Live — move your cursor across the field</div>
+    <canvas id="orbs" aria-label="Interactive particle field"></canvas>
+    <div class="replaybar">
+      <button class="replay" data-replay="orbs">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+        Reseed field
+      </button>
+      <span class="replay-note">Randomises positions, velocities and hues</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 — FORENSIC ============ -->
+<section class="mod" id="m6">
+  <p class="tag">Effect 06</p>
+  <h2>Forensic Annotation &amp; Scrubber</h2>
+  <p class="reveal">Pins teach the reader <em>how to look</em>. The timeline slider replays the decisive seconds.</p>
+  <div class="why reveal"><b>Why it hooks:</b> Detective structure. The reader becomes co-investigator; the conclusion is withheld until evidence is assembled.</div>
+
+  <div class="demo">
+    <div class="demo-label">Live — hover pins, drag the timeline</div>
+    <div class="frame">
+      <div class="grid"></div>
+      <canvas id="scrub" width="700" height="290" aria-label="Reconstructed timeline"></canvas>
+      <button class="pin" style="left:26%;top:34%" aria-label="00:04 — vehicle enters frame"><span>00:04 — vehicle enters frame</span></button>
+      <button class="pin" style="left:63%;top:58%" aria-label="00:09 — second angle confirms"><span>00:09 — second angle confirms</span></button>
+      <button class="pin" style="left:44%;top:76%" aria-label="00:12 — shadow fixes time of day"><span>00:12 — shadow fixes time of day</span></button>
+    </div>
+    <input type="range" id="time" min="0" max="100" value="0" aria-label="Timeline scrubber">
+    <div class="replaybar">
+      <button class="replay" data-replay="forensic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+        Replay timeline
+      </button>
+      <span class="replay-note">Animates the scrubber 0 → 100 automatically</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 — KINETIC TYPE ============ -->
+<section class="mod" id="m7">
+  <p class="tag">Effect 07</p>
+  <h2>Kinetic Type &amp; Highlight Wipe</h2>
+  <p class="reveal">Characters animate in sequence; a key phrase fills with colour as it scrolls into view.</p>
+  <div class="why reveal"><b>Why it hooks:</b> Typography stops being a container and becomes an actor. The eye follows motion before it reads meaning.</div>
+
+  <div class="demo">
+    <div class="demo-label">Live — scroll into view, or replay below</div>
+    <p class="kinetic" id="kin1" data-split>Attention is earned per scroll.</p>
+    <p class="kin-sub">The strongest sentence gets <span class="highlight" id="hl1">a colour wipe instead of bold</span> — slower, and therefore noticed.</p>
+    <div class="replaybar">
+      <button class="replay" data-replay="type">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+        Replay type &amp; wipe
+      </button>
+      <span class="replay-note">Re-runs the per-character stagger and the wipe</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 — PARALLAX ============ -->
+<section class="mod" id="m8">
+  <p class="tag">Effect 08</p>
+  <h2>Parallax Depth</h2>
+  <p class="reveal">Six layers translate at different rates against the scroll. Distant layers barely move; near layers move most, which the brain reads as physical depth.</p>
+  <div class="why reveal"><b>Why it hooks:</b> Implied depth signals production value within the first second, justifying the reader's time investment before a word is read.</div>
+
+  <div class="demo">
+    <div class="demo-label">Live — scroll this block, or replay below</div>
+    <div class="px-stage" id="pxStage">
+      <div class="px-layer px-sky"   data-depth="0.05"></div>
+      <div class="px-layer px-sun"   data-depth="0.14"></div>
+      <div class="px-layer px-far"   data-depth="0.30"></div>
+      <div class="px-layer px-mid"   data-depth="0.58"></div>
+      <div class="px-layer px-near"  data-depth="0.95"></div>
+      <div class="px-layer px-grain" data-depth="0.20"></div>
+      <div class="px-cap">
+        <div>
+          <strong>Six layers, six speeds</strong>
+          <em>Depth 0.05 → 0.95</em>
+        </div>
+      </div>
+    </div>
+    <div class="px-readout">Offset: <code id="pxRead">0px</code> · scroll progress <code id="pxProg">0%</code></div>
+    <div class="replaybar">
+      <button class="replay" data-replay="parallax">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+        Replay parallax sweep
+      </button>
+      <span class="replay-note">Drives layers through a full −1 → +1 cycle without scrolling</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 — COLOR THREADING ============ -->
+<section class="mod" id="m9">
+  <p class="tag">Effect 09</p>
+  <h2>Color-Threaded Entities</h2>
+  <p class="reveal">A colour introduced in prose reappears in every chart, map and timeline that follows. The reader builds a private visual vocabulary and never needs a legend.</p>
+  <div class="why reveal"><b>Why it hooks:</b> Each recurrence produces a small recognition reward. The technique operates continuously rather than as discrete moments of spectacle, which is what makes a page <em>feel</em> authored.</div>
+
+  <div class="demo">
+    <div class="demo-label">Live — hover any coloured name, bar, dot or band</div>
+
+    <p class="thread-prose">
+      Three districts reported sharply different outcomes.
+      <span class="ent" data-ent="a">Northfield</span> recovered fastest,
+      while <span class="ent" data-ent="b">Lakeside</span> stalled by midyear.
+      <span class="ent" data-ent="c">Eastgate</span> never regained its baseline at all.
+    </p>
+
+    <div class="thread-grid">
+      <div class="thread-panel">
+        <div class="panel-cap">Chart</div>
+        <svg id="threadChart" viewBox="0 0 300 150" role="img" aria-label="Comparison chart"></svg>
+      </div>
+      <div class="thread-panel">
+        <div class="panel-cap">Map</div>
+        <svg id="threadMap" viewBox="0 0 300 150" role="img" aria-label="District map"></svg>
+      </div>
+    </div>
+
+    <div class="thread-panel full">
+      <div class="panel-cap">Timeline</div>
+      <div class="timeline" id="threadTime"></div>
+    </div>
+
+    <div class="replaybar">
+      <button class="replay" data-replay="thread">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+        Replay colour introduction
+      </button>
+      <span class="replay-note">Re-teaches each entity colour in narrative order</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 10 — BINARY QUIZ ============ -->
+<section class="mod" id="m10">
+  <p class="tag">Effect 10</p>
+  <h2>Binary Quiz Accumulator</h2>
+  <p class="reveal">Twelve statements, one tap each. Lowering the cost of a single interaction is what lets you raise the <em>number</em> of interactions.</p>
+  <div class="why reveal"><b>Why it hooks:</b> Sunk-cost accumulation. By the fifth answer the reader has invested enough to want the result, and the progress bar makes that investment visible.</div>
+
+  <div class="demo">
+    <div class="demo-label">Live — agree or disagree, twelve times</div>
+
+    <div class="quiz" id="quiz">
+      <div class="quiz-meter"><div class="quiz-fill" id="quizFill"></div></div>
+      <div class="quiz-count" id="quizCount">0 of 12</div>
+
+      <div class="quiz-stage" id="quizStage">
+        <p class="quiz-q" id="quizQ">—</p>
+      </div>
+
+      <div class="quiz-btns">
+        <button class="qb agree"    data-ans="1">Agree</button>
+        <button class="qb disagree" data-ans="0">Disagree</button>
+      </div>
+
+      <div class="quiz-dots" id="quizDots"></div>
+
+      <div class="quiz-result" id="quizResult" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="replaybar">
+      <button class="replay" data-replay="quiz">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+        Restart quiz
+      </button>
+      <span class="replay-note">Clears all answers and returns to question one</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 — TURN-BY-TURN ============ -->
+<section class="mod" id="m11">
+  <p class="tag">Effect 11</p>
+  <h2>Turn-by-Turn Procedural Graphic</h2>
+  <p class="reveal">One continuous action, decomposed into five inspectable phases. The reader can watch it run, or stop and interrogate any single stage.</p>
+  <div class="why reveal"><b>Why it hooks:</b> Expertise is invisible at full speed. Slowing a motion down and labelling its parts converts a spectator into someone who can <em>see</em> what the athlete is doing — a genuine transfer of knowledge, not just spectacle.</div>
+
+  <div class="demo">
+    <div class="demo-label">Live — click a phase, scrub the slider, or press play</div>
+
+    <div class="proc-stage">
+      <canvas id="procCanvas" width="760" height="380" aria-label="Giant slalom turn decomposition"></canvas>
+      <div class="proc-badge" id="procBadge">Phase 1</div>
+    </div>
+
+    <div class="proc-phases" id="procPhases"></div>
+
+    <div class="proc-controls">
+      <button class="act" id="procPlay" aria-label="Play or pause the sequence">▶ Play</button>
+      <input type="range" id="procScrub" min="0" max="1000" value="0" aria-label="Scrub through the turn">
+      <span class="proc-time" id="procTime">0.00s</span>
+    </div>
+
+    <div class="proc-note" id="procNote"></div>
+
+    <div class="replaybar">
+      <button class="replay" data-replay="proc">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+        Replay full turn
+      </button>
+      <span class="replay-note">Resets to phase one and plays all five stages</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 12 — AR PLACEHOLDER ============ -->
+<section class="mod" id="m12">
+  <p class="tag">Effect 12</p>
+  <h2>AR Placeholder — Spatial Artifact Viewer</h2>
+  <p class="reveal">A 3D object you inspect by tilting your phone or dragging on desktop. Annotation hotspots surface context when you rotate the artifact to face them.</p>
+  <div class="why reveal"><b>Why it hooks:</b> Embodiment. Scale and form become <em>felt</em> rather than described — the reader's own movement does the explaining, which is the mechanism real AR exploits.</div>
+
+  <div class="demo">
+    <div class="demo-label">Live — drag to rotate · tilt on mobile · click hotspots</div>
+
+    <div class="ar-stage" id="arStage">
+      <canvas id="arCanvas" width="760" height="420" aria-label="Rotatable 3D artifact"></canvas>
+
+      <div class="ar-hud">
+        <span class="ar-chip" id="arMode">DRAG MODE</span>
+        <span class="ar-chip ghost" id="arAngle">0° / 0°</span>
+      </div>
+
+      <button class="ar-tilt" id="arTilt">Enable tilt control</button>
+      <div class="ar-hint" id="arHint">Drag the artifact to rotate</div>
+    </div>
+
+    <div class="ar-readout">
+      <div class="ar-label" id="arLabel">Amphora · c. 530 BC</div>
+      <div class="ar-desc" id="arDesc">Rotate to locate three annotated regions. Each marks a point where the object's condition tells part of its history.</div>
+    </div>
+
+    <div class="ar-dots" id="arDots"></div>
+
+    <div class="replaybar">
+      <button class="replay" data-replay="ar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+        Replay orbit tour
+      </button>
+      <span class="replay-note">Auto-rotates through all three annotation points</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 13 — BEFORE/AFTER ============ -->
+<section class="mod" id="m13">
+  <p class="tag">Effect 13</p>
+  <h2>Before / After Comparison</h2>
+  <p class="reveal">A draggable divider between two states of the same scene. The reader performs the comparison rather than being told the conclusion.</p>
+  <div class="why reveal"><b>Why it hooks:</b> Change is hard to perceive from two images side by side, but trivial when they occupy the same pixels. The reader's hand does the analysis.</div>
+
+  <div class="demo">
+    <div class="demo-label">Live — drag the divider, or focus the handle and use arrow keys</div>
+    <div class="ba-wrap" id="baWrap">
+      <canvas class="ba-layer" id="baAfter" width="760" height="380"></canvas>
+      <div class="ba-clip" id="baClip">
+        <canvas class="ba-layer" id="baBefore" width="760" height="380"></canvas>
+      </div>
+      <div class="ba-divider" id="baDiv">
+        <button class="ba-handle" id="baHandle" role="slider"
+                aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+                aria-label="Comparison divider">⟷</button>
+      </div>
+      <span class="ba-tag left">1984 · Pre-drought</span>
+      <span class="ba-tag right">2024 · Current</span>
+    </div>
+    <div class="ba-stat" id="baStat">Surface water loss: <b>—</b></div>
+    <div class="replaybar">
+      <button class="replay" data-replay="ba">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+        Replay sweep
+      </button>
+      <span class="replay-note">Auto-wipes the divider across the full frame</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 14 — AUDIO WAVEFORM ============ -->
+<section class="mod" id="m14">
+  <p class="tag">Effect 14</p>
+  <h2>Audio Waveform &amp; Transcript Sync</h2>
+  <p class="reveal">A scrubable waveform bound to a transcript. Clicking any line jumps the playhead; the active line highlights as it plays.</p>
+  <div class="why reveal"><b>Why it hooks:</b> It makes audio skimmable. Readers who would never sit through eight minutes will happily jump to the sentence that interests them — and often stay.</div>
+
+  <div class="demo">
+    <div class="demo-label">Live — click the waveform or any transcript line</div>
+    <canvas id="wave" width="760" height="110" aria-label="Audio waveform scrubber"></canvas>
+    <div class="wave-ctrl">
+      <button class="act" id="wavePlay">▶ Play</button>
+      <span class="wave-time" id="waveTime">0:00 / 0:48</span>
+      <button class="wave-speed" id="waveSpeed" aria-label="Playback speed">1×</button>
+    </div>
+    <div class="transcript" id="transcript"></div>
+    <div class="replaybar">
+      <button class="replay" data-replay="wave">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+        Replay from start
+      </button>
+      <span class="replay-note">Rewinds the playhead and resumes playback</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 15 — PAYWALL SIMULATOR ============ -->
+<section class="mod" id="m15">
+  <p class="tag">Effect 15</p>
+  <h2>Dynamic Paywall Simulator</h2>
+  <p class="reveal">The most consequential storytelling effect is invisible: a model deciding <em>where</em> in your reading journey the narrative gets interrupted. Adjust the reader profile and watch the meter move.</p>
+  <div class="why reveal"><b>Why it hooks:</b> Making a hidden system inspectable is itself a story. The reader discovers the cut point is a tuned variable, not a fixed rule.</div>
+
+  <div class="demo">
+    <div class="demo-label">Live — drag the three reader-profile inputs</div>
+
+    <div class="pw-inputs">
+      <label class="pw-field">
+        <span>Engagement depth <b id="pwEngV">5</b></span>
+        <input type="range" id="pwEng" min="1" max="10" value="5">
+      </label>
+      <label class="pw-field">
+        <span>Visit frequency <b id="pwFreqV">4</b>/wk</span>
+        <input type="range" id="pwFreq" min="1" max="14" value="4">
+      </label>
+      <label class="pw-field">
+        <span>Price sensitivity <b id="pwPriceV">5</b></span>
+        <input type="range" id="pwPrice" min="1" max="10" value="5">
+      </label>
+    </div>
+
+    <div class="pw-meter">
+      <div class="pw-meter-head">
+        <span>Free articles allocated</span>
+        <b id="pwLimit">8</b>
+      </div>
+      <div class="pw-track" id="pwTrack"></div>
+    </div>
+
+    <div class="pw-out">
+      <div class="pw-stat"><span>Conversion propensity</span><b id="pwProp">—</b></div>
+      <div class="pw-stat"><span>Model verdict</span><b id="pwVerdict">—</b></div>
+    </div>
+
+    <div class="pw-gate" id="pwGate">
+      <div class="pw-gate-rule"></div>
+      <p class="pw-gate-copy" id="pwCopy">—</p>
+    </div>
+
+    <div class="replaybar">
+      <button class="replay" data-replay="pw">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+        Replay profile sweep
+      </button>
+      <span class="replay-note">Cycles three archetypes: casual, regular, loyalist</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GLOBAL ============ -->
+<section class="mod" id="m9">
+  <p class="tag">Global</p>
+  <h2>Replay Everything</h2>
+  <div class="demo">
+    <div class="replaybar bare">
+      <button class="replay accent" data-replay="all">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+        Replay all fifteen effects
+      </button>
+      <span class="replay-note">Fires every module's reset in sequence · shortcut: press <kbd>R</kbd></span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Self-contained demo · no dependencies · reduced-motion aware
+  <br><span style="opacity:.6">Shortcuts: <kbd>R</kbd> replay all · <kbd>T</kbd> back to frame</span>
+</footer>
+
+
+<!-- ============ BACK TO TOP ============ -->
+<div class="btt-wrap" id="bttWrap" aria-hidden="true">
+  <button class="btt" id="btt" aria-label="Back to The Structural Frame">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+    <span class="btt-ring" aria-hidden="true"></span>
+  </button>
+  <span class="btt-tip">The Structural Frame</span>
+  <button class="btt-mini" id="bttTop" aria-label="Back to page top">top</button>
+</div>
+
+
+<script src="script.js" defer></script>
+</body>
+</html>
