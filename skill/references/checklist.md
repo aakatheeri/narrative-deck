@@ -11,4 +11,7 @@
 - [ ] Focus-visible: every interactive element has an obvious `:focus-visible` state.
 - [ ] Replay: buttons reset state without fighting scroll observers.
 - [ ] Transcript or text fallback exists for audio/visual-only moments.
+- [ ] Published pages include title, description, canonical URL, robots, and social summary metadata.
+- [ ] Public demos expose source/context signals: author, repository link, and optional JSON-LD.
+- [ ] IDs are unique; ARIA references resolve; canvas/SVG-only visuals have labels or text fallbacks.
 - [ ] No dependencies, package.json, build step, or generated bundle.

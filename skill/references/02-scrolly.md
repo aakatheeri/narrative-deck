@@ -1,46 +1,46 @@
 # 02 — Sticky Scrollytelling
 
 ## When to use
-Use at Pinch Point 1 when a fact needs staged pressure. Sticky visual state should change only when text steps enter the reading band.
+Use at Pinch Point 1 when the reader must keep looking at one object while its meaning changes. Best for maps, documents, product shots, or charts that need staged attention.
 
 ## When NOT to use
-Do not open with it; it asks for scrolling before the reader knows why to care.
+Do not open with it; it asks for scrolling before the reader knows why to care. Do not use it for decoration only.
 
 ## Prompt
-Build a two-column scrolly with a sticky canvas and text steps. Observe each `.step` with a middle viewport root margin, mark the active step, and draw the canvas from a small integer state. Keep scroll listeners out of the path.
+Build a two-column scrolly with a sticky visual and text steps. Each `.step` changes a small integer state on the parent. The sticky object transforms with CSS: map pan/zoom, crop, annotation opacity, highlight, or label reveal. Keep scroll listeners out of the path.
 
 ## Implementation
 ```js
-const viz = $('#viz');
-const vz  = viz.getContext('2d');
-let state = 0, tick = 0;
-function drawViz() {
-  vz.fillStyle = '#101418';
-  vz.fillRect(0, 0, 520, 520);
-  pts.forEach((p, i) => {
-    let y = p.base, col = '#5b8db8', r = 9, a = 1;
-    if (state >= 1) { y = p.base + (i % 2 ? -1 : 1) * (i * 9); col = i % 2 ? '#4f9ad6' : '#d0565c'; }
-    if (state === 2) { const hot = i === 7; a = hot ? 1 : .16; r = hot ? 17 : 8; }
-    vz.globalAlpha = a; vz.fillStyle = col; vz.beginPath(); vz.arc(p.x, y, r, 0, Math.PI * 2); vz.fill();
-  });
-  tick++; requestAnimationFrame(drawViz);
-}
-steps.forEach(s => new IntersectionObserver(entries => entries.forEach(e => {
-  if (!e.isIntersecting) return;
+const scrolly = $('.scrolly');
+const steps = $$('.step', scrolly);
+function setState(step) {
   steps.forEach(x => x.classList.remove('active'));
-  e.target.classList.add('active'); state = +e.target.dataset.state;
-}), { rootMargin: '-45% 0px -45% 0px' }).observe(s));
+  step.classList.add('active');
+  scrolly.dataset.state = step.dataset.state;
+}
+const io = new IntersectionObserver(entries => entries.forEach(e => {
+  if (e.isIntersecting) setState(e.target);
+}), { rootMargin: '-45% 0px -45% 0px' });
+steps.forEach(s => io.observe(s));
+```
+
+```css
+.sticky-viz{position:sticky;top:12vh}
+.object{transition:transform .7s var(--ease),opacity .4s var(--ease)}
+.scrolly[data-state="1"] .object{transform:translate3d(-24px,0,0) scale(1.04)}
+.scrolly[data-state="2"] .object{transform:translate3d(18px,0,0) scale(1.12) rotate(2deg)}
+.scrolly[data-state="2"] .hotspot{opacity:1}
 ```
 
 ## Known failure
-An infinite draw loop can keep running offscreen; gate it if copying into heavier pages.
+Continuous scroll math makes sticky sections feel heavy. Use IntersectionObserver for step changes. If using canvas, gate any draw loop while offscreen.
 
 ## Checklist
 - [ ] Beat matches: Pinch Point 1.
+- [ ] Same object persists across steps.
+- [ ] Each state changes interpretation, not just decoration.
 - [ ] Reduced motion path exists.
 - [ ] Replay resets without stale state.
-- [ ] Keyboard/focus state exists.
-- [ ] Uses shared tokens where styled.
 
 ## See it live
 [docs/index.html#m2](../../docs/index.html#m2)

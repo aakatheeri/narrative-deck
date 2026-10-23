@@ -88,74 +88,26 @@ new IntersectionObserver((entries, obs) => {
 REPLAY.reveal = playStagger;
 
 /* ============ 02 — SCROLLYTELLING ============ */
-const viz = $('#viz');
-const vz  = viz.getContext('2d');
-let state = 0, tick = 0;
+const scrollyDemo = $('#scrollyDemo');
+const steps = $$('.step', scrollyDemo);
 
-const pts = Array.from({ length: 12 }, (_, i) => ({
-  x: 40 + i * 38,
-  base: 260 + Math.sin(i * .9) * 40
-}));
-
-function drawViz() {
-  vz.fillStyle = '#101418';
-  vz.fillRect(0, 0, 520, 520);
-
-  vz.strokeStyle = 'rgba(255,255,255,.07)';
-  for (let y = 80; y < 520; y += 70) {
-    vz.beginPath(); vz.moveTo(20, y); vz.lineTo(500, y); vz.stroke();
-  }
-
-  pts.forEach((p, i) => {
-    let y = p.base, col = '#5b8db8', r = 9, a = 1;
-
-    if (state >= 1) {
-      y = p.base + (i % 2 ? -1 : 1) * (i * 9);
-      col = i % 2 ? '#4f9ad6' : '#d0565c';
-    }
-    if (state === 2) {
-      const hot = i === 7;
-      a = hot ? 1 : .16;
-      r = hot ? 17 : 8;
-      if (hot) col = '#f0b429';
-    }
-
-    vz.globalAlpha = a;
-    vz.fillStyle = col;
-    vz.beginPath();
-    vz.arc(p.x, y + Math.sin(tick / 40 + i) * (RM ? 0 : 4), r, 0, Math.PI * 2);
-    vz.fill();
-
-    if (state === 2 && i === 7) {
-      vz.globalAlpha = 1;
-      vz.fillStyle = '#fff';
-      vz.font = '13px sans-serif';
-      vz.fillText('outlier', p.x - 22, y - 30);
-    }
-  });
-
-  vz.globalAlpha = 1;
-  tick++;
-  requestAnimationFrame(drawViz);
+function setScrollyState(step) {
+  steps.forEach(x => x.classList.remove('active'));
+  step.classList.add('active');
+  scrollyDemo.dataset.state = step.dataset.state;
 }
-drawViz();
 
-const steps = $$('.step');
-steps.forEach(s => {
-  new IntersectionObserver(entries => entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    steps.forEach(x => x.classList.remove('active'));
-    e.target.classList.add('active');
-    state = +e.target.dataset.state;
-  }), { rootMargin: '-45% 0px -45% 0px' }).observe(s);
-});
+const scrollyIO = new IntersectionObserver(entries => entries.forEach(e => {
+  if (!e.isIntersecting) return;
+  setScrollyState(e.target);
+}), { rootMargin: '-45% 0px -45% 0px' });
+
+steps.forEach(s => scrollyIO.observe(s));
 
 REPLAY.scrolly = () => {
   let i = 0;
   const run = () => {
-    steps.forEach(x => x.classList.remove('active'));
-    steps[i].classList.add('active');
-    state = +steps[i].dataset.state;
+    setScrollyState(steps[i]);
     if (++i < steps.length) setTimeout(run, RM ? 0 : 1400);
   };
   run();
@@ -167,7 +119,7 @@ const barsEl = $('#bars');
 const vals = [18, 27, 33, 29, 41, 52, 47, 63, 71, 68, 84, 92];
 
 barsEl.innerHTML = vals.map(v =>
-  `<button class="bar" data-v="${v}% — hover reveals detail" aria-label="${v} percent"></button>`
+  `<button type="button" class="bar" data-v="${v}% — hover reveals detail" aria-label="${v} percent"></button>`
 ).join('');
 
 function growBars() {
@@ -548,8 +500,8 @@ REPLAY.type = playType;
 /* ============ 08 — PARALLAX ============ */
 const pxStage  = $('#pxStage');
 const pxLayers = $$('.px-layer', pxStage);
-const heroEl   = $('.hero');
-const heroLayers = $$('.hero .layer');
+const heroEl = $('.hero');
+const heroDepthEls = $$('[data-hero-depth]', heroEl);
 const pxRead = $('#pxRead');
 const pxProg = $('#pxProg');
 
@@ -575,22 +527,36 @@ function parallaxFromScroll() {
   applyParallax(p);
 }
 
+function heroParallaxFromScroll() {
+  if (RM) return;
+  const r = heroEl.getBoundingClientRect();
+  if (r.bottom <= 0 || r.top >= innerHeight) return;
+  const p = Math.max(0, Math.min(1, -r.top / r.height));
+  heroDepthEls.forEach(el => {
+    const d = +el.dataset.heroDepth || 0;
+    el.style.setProperty('--hero-y', (p * 90 * d).toFixed(2) + 'px');
+    if (el.classList.contains('hero-depth')) {
+      el.style.setProperty('--hero-x', (p * -20 * d).toFixed(2) + 'px');
+    }
+  });
+}
+
 let ticking = false;
 addEventListener('scroll', () => {
   if (RM || ticking) return;
   ticking = true;
   requestAnimationFrame(() => {
-    const hr = heroEl.getBoundingClientRect();
-    heroLayers.forEach(l => {
-      const d = +l.dataset.depth || .3;
-      l.style.transform = `translate3d(0, ${(-hr.top * d).toFixed(2)}px, 0)`;
-    });
+    heroParallaxFromScroll();
     parallaxFromScroll();
     ticking = false;
   });
 }, { passive: true });
 
-addEventListener('resize', parallaxFromScroll);
+addEventListener('resize', () => {
+  heroParallaxFromScroll();
+  parallaxFromScroll();
+});
+heroParallaxFromScroll();
 parallaxFromScroll();   // paint once on load so the stage isn't flat
 
 REPLAY.parallax = () => {
@@ -825,7 +791,7 @@ let procT = 0, procPlaying = false, procRAF = null, procLast = 0;
 
 /* Build phase buttons */
 $('#procPhases').innerHTML = PHASES.map((p, i) =>
-  `<button class="ph" data-ph="${i}">
+  `<button type="button" class="ph" data-ph="${i}" aria-pressed="false">
      <span class="ph-n">${p.n}</span>
      <span class="ph-t">${p.t}</span>
    </button>`
@@ -954,7 +920,11 @@ function drawProc() {
 
 function syncProcUI() {
   const i = phaseOf(procT);
-  phBtns.forEach((b, k) => b.classList.toggle('on', k === i));
+  phBtns.forEach((b, k) => {
+    const on = k === i;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', String(on));
+  });
   procBadge.textContent = `${PHASES[i].n} · ${PHASES[i].t}`;
   procNote.textContent = PHASES[i].note;
   procScrub.value = Math.round(procT * 1000);
@@ -1048,9 +1018,14 @@ const arSeen = new Set();
 
 /* Build progress dots */
 $('#arDots').innerHTML = SPOTS.map((s, i) =>
-  `<button class="ar-dot" data-spot="${i}" aria-label="Go to ${s.label}"></button>`
+  `<button type="button" class="ar-dot" data-spot="${i}" aria-label="Go to ${s.label}" aria-pressed="false"></button>`
 ).join('');
 const arDots = $$('.ar-dot');
+
+function setArDotSeen(i, seen = true) {
+  arDots[i].classList.toggle('seen', seen);
+  arDots[i].setAttribute('aria-pressed', String(seen));
+}
 
 /* --- 3D projection helpers --- */
 function project(x, y, z) {
@@ -1174,7 +1149,7 @@ function drawAR() {
 
       if (!arSeen.has(i)) {
         arSeen.add(i);
-        arDots[i].classList.add('seen');
+        setArDotSeen(i);
         arLabel.textContent = sp.label;
         arDesc.textContent = sp.desc;
       }
@@ -1239,6 +1214,7 @@ arTilt.addEventListener('click', async () => {
     removeEventListener('deviceorientation', onTilt);
     arTiltOn = false; tiltBase = null;
     arTilt.classList.remove('on');
+    arTilt.setAttribute('aria-pressed', 'false');
     arTilt.textContent = 'Enable tilt control';
     arMode.textContent = 'DRAG MODE';
     return;
@@ -1263,6 +1239,7 @@ arTilt.addEventListener('click', async () => {
   addEventListener('deviceorientation', onTilt);
   arTiltOn = true;
   arTilt.classList.add('on');
+  arTilt.setAttribute('aria-pressed', 'true');
   arTilt.textContent = 'Tilt active · tap to stop';
   arMode.textContent = 'TILT MODE';
   arHint.textContent = 'Tilt your device to orbit';
@@ -1296,7 +1273,7 @@ arDots.forEach(d => d.addEventListener('click', () => arGoTo(+d.dataset.spot)));
 /* --- orbit tour (replay) --- */
 function arTour() {
   arSeen.clear();
-  arDots.forEach(d => d.classList.remove('seen'));
+  arDots.forEach((d, i) => setArDotSeen(i, false));
   arPitch = 0.12;
   arHint.classList.add('hide');
 
@@ -1374,6 +1351,7 @@ function setBA(p) {
   baClip.style.width = baPos + '%';
   baDiv.style.left = baPos + '%';
   baHandle.setAttribute('aria-valuenow', Math.round(baPos));
+  baHandle.setAttribute('aria-valuetext', `${Math.round(baPos)} percent before image visible`);
   baStat.innerHTML = `Surface water loss: <b>${Math.round((100 - baPos) * 0.58)}%</b> revealed`;
 }
 
@@ -1437,7 +1415,7 @@ const PEAKS = Array.from({ length: 190 }, (_, i) => {
 });
 
 $('#transcript').innerHTML = TRANSCRIPT.map((l, i) =>
-  `<button class="tr-line" data-i="${i}">
+  `<button type="button" class="tr-line" data-i="${i}" aria-current="false">
      <span class="tr-ts">0:${String(l.t).padStart(2,'0')}</span>${l.s}
    </button>`).join('');
 const trLines = $$('.tr-line');
@@ -1470,7 +1448,11 @@ function syncWave() {
   drawWave();
   let idx = 0;
   TRANSCRIPT.forEach((l, i) => { if (wT >= l.t) idx = i; });
-  trLines.forEach((b, k) => b.classList.toggle('on', k === idx));
+  trLines.forEach((b, k) => {
+    const on = k === idx;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-current', String(on));
+  });
   const m = Math.floor(wT / 60), s = Math.floor(wT % 60);
   waveTime.textContent = `${m}:${String(s).padStart(2,'0')} / 0:48`;
 }
@@ -1741,7 +1723,7 @@ let beatTour = null;
 
 /* Build the rail */
 beatRail.innerHTML = BEATS.map((b, i) =>
-  `<button class="beat" data-b="${i}" data-h="${b.h}" aria-label="${b.name}">
+  `<button type="button" class="beat" data-b="${i}" data-h="${b.h}" aria-label="${b.name}" aria-controls="beatDetail" aria-current="false">
      <span class="beat-node"></span>
      <span class="beat-label">${b.name}</span>
    </button>`
@@ -1753,7 +1735,9 @@ function showBeat(i, markSeen = true) {
   const b = BEATS[i];
 
   beatBtns.forEach((btn, k) => {
-    btn.classList.toggle('on', k === i);
+    const on = k === i;
+    btn.classList.toggle('on', on);
+    btn.setAttribute('aria-current', String(on));
     if (markSeen && k === i) btn.classList.add('seen');
   });
 
@@ -1886,7 +1870,7 @@ addEventListener('keydown', e => {
 
 /* ============ REPLAY DISPATCH ============ */
 const ORDER = [
-  'structure','reveal','bars','draw','orbs','forensic','type','parallax',
+  'reveal','scrolly','bars','draw','orbs','forensic','type','parallax',
   'thread','quiz','proc','ar','ba','wave','pw'
 ];
 

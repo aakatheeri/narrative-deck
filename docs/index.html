@@ -8,6 +8,32 @@
 
 <!-- 2. Meta description -->
 <meta name="description" content="Fifteen interactive storytelling effects used in premium online journalism, each with a live demo, a plain-language explanation, and a replay control.">
+<meta name="author" content="YOURNAME">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#fbfaf8">
+<link rel="canonical" href="https://YOURNAME.github.io/narrative-deck/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fifteen Storytelling Effects — Interactive Demo">
+<meta property="og:description" content="A dependency-free interactive guide to narrative structure and fifteen storytelling effects for premium web presentations.">
+<meta property="og:url" content="https://YOURNAME.github.io/narrative-deck/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fifteen Storytelling Effects — Interactive Demo">
+<meta name="twitter:description" content="A dependency-free interactive guide to narrative structure and fifteen storytelling effects for premium web presentations.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "Narrative Deck",
+  "description": "A dependency-free interactive guide to narrative structure and fifteen storytelling effects for premium web presentations.",
+  "codeRepository": "https://github.com/YOURNAME/narrative-deck",
+  "programmingLanguage": ["HTML", "CSS", "JavaScript"],
+  "license": "https://opensource.org/license/mit",
+  "author": {
+    "@type": "Person",
+    "name": "YOURNAME"
+  }
+}
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -17,10 +43,10 @@
 
 <!-- ============ HERO ============ -->
 <header class="hero">
-  <div class="layer l1" data-depth="0.25"></div>
-  <div class="layer l2" data-depth="0.45"></div>
-  <div class="layer l3" data-depth="0.12"></div>
-  <div>
+  <div class="hero-depth hero-panel panel-blue" data-hero-depth="0.22"></div>
+  <div class="hero-depth hero-panel panel-red" data-hero-depth="0.38"></div>
+  <div class="hero-depth hero-panel panel-paper" data-hero-depth="0.14"></div>
+  <div class="hero-copy" data-hero-depth="-0.06">
     <p>Interactive Demonstration</p>
     <h1>Fifteen Effects That<br>Hold a Reader</h1>
   </div>
@@ -64,7 +90,7 @@
     </div>
 
     <div class="replaybar">
-      <button class="replay" data-replay="structure">
+      <button type="button" class="replay" data-replay="structure">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
         Replay beat tour
       </button>
@@ -89,7 +115,7 @@
       <p class="sg last"><b>Panel three</b> closes the sequence.</p>
     </div>
     <div class="replaybar">
-      <button class="replay" data-replay="reveal">
+      <button type="button" class="replay" data-replay="reveal">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
         Replay reveal
       </button>
@@ -102,18 +128,47 @@
 <section class="mod" id="m2">
   <p class="tag">Effect 02</p>
   <h2>Sticky Scrollytelling</h2>
-  <p class="reveal">One visual pins to the viewport while text panels scroll past it. Each panel swaps the graphic's state — the scroll becomes a projector.</p>
-  <div class="why reveal"><b>Why it hooks:</b> The reader controls pacing. Variable formats stop attention from decaying, and each gesture produces visible change.</div>
+  <p class="reveal">A city map pins to the viewport while text panels scroll past it. Each panel pans, zooms, or labels the same map — the scroll becomes a guided investigation.</p>
+  <div class="why reveal"><b>Why it hooks:</b> The reader keeps one visual model in memory while each step adds meaning: first location, then focus, then evidence.</div>
 
-  <div class="scrolly">
+  <div class="scrolly" id="scrollyDemo" data-state="0">
     <div class="sticky-viz">
-      <canvas id="viz" width="520" height="520" aria-label="Animated data visualisation"></canvas>
+      <div class="scrolly-object" role="img" aria-label="A city impact map that zooms to a neighborhood, highlights a disruption zone, and reveals a callout as the scroll steps change">
+        <div class="map-card">
+          <div class="map-kicker">City impact map</div>
+          <div class="map-viewport">
+            <div class="map-layer">
+              <span class="map-river"></span>
+              <span class="map-road road-a"></span>
+              <span class="map-road road-b"></span>
+              <span class="map-road road-c"></span>
+              <span class="map-road road-d"></span>
+              <span class="map-zone"></span>
+              <span class="map-marker">!</span>
+              <span class="map-label label-north">North station</span>
+              <span class="map-label label-site">delay cluster</span>
+            </div>
+          </div>
+          <div class="map-caption">Same map. More meaning with every step.</div>
+        </div>
+        <div class="map-callout callout-a">zoom to the neighborhood</div>
+        <div class="map-callout callout-b">reports cluster here</div>
+      </div>
     </div>
     <div class="steps">
-      <div class="step" data-state="0"><b>Step 01 — Baseline</b>Twelve data points sit at resting value. Nothing has happened yet.</div>
-      <div class="step" data-state="1"><b>Step 02 — Divergence</b>Scroll further and the series splits. Colour now carries meaning.</div>
-      <div class="step" data-state="2"><b>Step 03 — Focus</b>Everything dims except the outlier. Attention is directed, not requested.</div>
+      <div class="step active" data-state="0"><b>Step 01 — Whole city</b>Start wide so the reader understands the shape of the place.</div>
+      <div class="step" data-state="1"><b>Step 02 — Neighborhood</b>The map moves toward the station where the story begins.</div>
+      <div class="step" data-state="2"><b>Step 03 — Impact zone</b>A red zone appears around the streets with repeated delays.</div>
+      <div class="step" data-state="3"><b>Step 04 — Evidence</b>The final label connects the hotspot to reported disruption.</div>
     </div>
+  </div>
+
+  <div class="replaybar">
+    <button type="button" class="replay" data-replay="scrolly">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+      Replay map tour
+    </button>
+    <span class="replay-note">Cycles through the sticky map states</span>
   </div>
 
 </section>
@@ -129,7 +184,7 @@
     <div class="demo-label">Live — hover or tab to any column</div>
     <div class="bars" id="bars"></div>
     <div class="replaybar">
-      <button class="replay" data-replay="bars">
+      <button type="button" class="replay" data-replay="bars">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
         Replay growth
       </button>
@@ -149,11 +204,11 @@
     <div class="demo-label">Live — drag inside the shaded zone</div>
     <div id="drawWrap"><canvas id="draw" aria-label="Draw your prediction"></canvas></div>
     <div class="btnrow">
-      <button class="act" id="revealBtn">Reveal actual</button>
+      <button type="button" class="act" id="revealBtn">Reveal actual</button>
     </div>
     <div id="verdict" role="status" aria-live="polite"></div>
     <div class="replaybar">
-      <button class="replay" data-replay="draw">
+      <button type="button" class="replay" data-replay="draw">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
         Replay / clear guess
       </button>
@@ -173,7 +228,7 @@
     <div class="demo-label">Live — move your cursor across the field</div>
     <canvas id="orbs" aria-label="Interactive particle field"></canvas>
     <div class="replaybar">
-      <button class="replay" data-replay="orbs">
+      <button type="button" class="replay" data-replay="orbs">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
         Reseed field
       </button>
@@ -194,13 +249,13 @@
     <div class="frame">
       <div class="grid"></div>
       <canvas id="scrub" width="700" height="290" aria-label="Reconstructed timeline"></canvas>
-      <button class="pin" style="left:26%;top:34%" aria-label="00:04 — vehicle enters frame"><span>00:04 — vehicle enters frame</span></button>
-      <button class="pin" style="left:63%;top:58%" aria-label="00:09 — second angle confirms"><span>00:09 — second angle confirms</span></button>
-      <button class="pin" style="left:44%;top:76%" aria-label="00:12 — shadow fixes time of day"><span>00:12 — shadow fixes time of day</span></button>
+      <button type="button" class="pin" style="left:26%;top:34%" aria-label="00:04 — vehicle enters frame"><span>00:04 — vehicle enters frame</span></button>
+      <button type="button" class="pin" style="left:63%;top:58%" aria-label="00:09 — second angle confirms"><span>00:09 — second angle confirms</span></button>
+      <button type="button" class="pin" style="left:44%;top:76%" aria-label="00:12 — shadow fixes time of day"><span>00:12 — shadow fixes time of day</span></button>
     </div>
     <input type="range" id="time" min="0" max="100" value="0" aria-label="Timeline scrubber">
     <div class="replaybar">
-      <button class="replay" data-replay="forensic">
+      <button type="button" class="replay" data-replay="forensic">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
         Replay timeline
       </button>
@@ -221,7 +276,7 @@
     <p class="kinetic" id="kin1" data-split>Attention is earned per scroll.</p>
     <p class="kin-sub">The strongest sentence gets <span class="highlight" id="hl1">a colour wipe instead of bold</span> — slower, and therefore noticed.</p>
     <div class="replaybar">
-      <button class="replay" data-replay="type">
+      <button type="button" class="replay" data-replay="type">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
         Replay type &amp; wipe
       </button>
@@ -255,7 +310,7 @@
     </div>
     <div class="px-readout">Offset: <code id="pxRead">0px</code> · scroll progress <code id="pxProg">0%</code></div>
     <div class="replaybar">
-      <button class="replay" data-replay="parallax">
+      <button type="button" class="replay" data-replay="parallax">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
         Replay parallax sweep
       </button>
@@ -298,7 +353,7 @@
     </div>
 
     <div class="replaybar">
-      <button class="replay" data-replay="thread">
+      <button type="button" class="replay" data-replay="thread">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
         Replay colour introduction
       </button>
@@ -326,8 +381,8 @@
       </div>
 
       <div class="quiz-btns">
-        <button class="qb agree"    data-ans="1">Agree</button>
-        <button class="qb disagree" data-ans="0">Disagree</button>
+        <button type="button" class="qb agree"    data-ans="1">Agree</button>
+        <button type="button" class="qb disagree" data-ans="0">Disagree</button>
       </div>
 
       <div class="quiz-dots" id="quizDots"></div>
@@ -336,7 +391,7 @@
     </div>
 
     <div class="replaybar">
-      <button class="replay" data-replay="quiz">
+      <button type="button" class="replay" data-replay="quiz">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
         Restart quiz
       </button>
@@ -363,7 +418,7 @@
     <div class="proc-phases" id="procPhases"></div>
 
     <div class="proc-controls">
-      <button class="act" id="procPlay" aria-label="Play or pause the sequence">▶ Play</button>
+      <button type="button" class="act" id="procPlay" aria-label="Play or pause the sequence">▶ Play</button>
       <input type="range" id="procScrub" min="0" max="1000" value="0" aria-label="Scrub through the turn">
       <span class="proc-time" id="procTime">0.00s</span>
     </div>
@@ -371,7 +426,7 @@
     <div class="proc-note" id="procNote"></div>
 
     <div class="replaybar">
-      <button class="replay" data-replay="proc">
+      <button type="button" class="replay" data-replay="proc">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
         Replay full turn
       </button>
@@ -398,7 +453,7 @@
         <span class="ar-chip ghost" id="arAngle">0° / 0°</span>
       </div>
 
-      <button class="ar-tilt" id="arTilt">Enable tilt control</button>
+      <button type="button" class="ar-tilt" id="arTilt" aria-pressed="false">Enable tilt control</button>
       <div class="ar-hint" id="arHint">Drag the artifact to rotate</div>
     </div>
 
@@ -410,7 +465,7 @@
     <div class="ar-dots" id="arDots"></div>
 
     <div class="replaybar">
-      <button class="replay" data-replay="ar">
+      <button type="button" class="replay" data-replay="ar">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
         Replay orbit tour
       </button>
@@ -429,13 +484,14 @@
   <div class="demo">
     <div class="demo-label">Live — drag the divider, or focus the handle and use arrow keys</div>
     <div class="ba-wrap" id="baWrap">
-      <canvas class="ba-layer" id="baAfter" width="760" height="380"></canvas>
+      <canvas class="ba-layer" id="baAfter" width="760" height="380" aria-label="Current shoreline after drought"></canvas>
       <div class="ba-clip" id="baClip">
-        <canvas class="ba-layer" id="baBefore" width="760" height="380"></canvas>
+        <canvas class="ba-layer" id="baBefore" width="760" height="380" aria-label="Historical shoreline before drought"></canvas>
       </div>
       <div class="ba-divider" id="baDiv">
-        <button class="ba-handle" id="baHandle" role="slider"
+        <button type="button" class="ba-handle" id="baHandle" role="slider"
                 aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+                aria-valuetext="50 percent before image visible"
                 aria-label="Comparison divider">⟷</button>
       </div>
       <span class="ba-tag left">1984 · Pre-drought</span>
@@ -443,7 +499,7 @@
     </div>
     <div class="ba-stat" id="baStat">Surface water loss: <b>—</b></div>
     <div class="replaybar">
-      <button class="replay" data-replay="ba">
+      <button type="button" class="replay" data-replay="ba">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
         Replay sweep
       </button>
@@ -463,13 +519,13 @@
     <div class="demo-label">Live — click the waveform or any transcript line</div>
     <canvas id="wave" width="760" height="110" aria-label="Audio waveform scrubber"></canvas>
     <div class="wave-ctrl">
-      <button class="act" id="wavePlay">▶ Play</button>
+      <button type="button" class="act" id="wavePlay">▶ Play</button>
       <span class="wave-time" id="waveTime">0:00 / 0:48</span>
-      <button class="wave-speed" id="waveSpeed" aria-label="Playback speed">1×</button>
+      <button type="button" class="wave-speed" id="waveSpeed" aria-label="Playback speed">1×</button>
     </div>
     <div class="transcript" id="transcript"></div>
     <div class="replaybar">
-      <button class="replay" data-replay="wave">
+      <button type="button" class="replay" data-replay="wave">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
         Replay from start
       </button>
@@ -522,7 +578,7 @@
     </div>
 
     <div class="replaybar">
-      <button class="replay" data-replay="pw">
+      <button type="button" class="replay" data-replay="pw">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
         Replay profile sweep
       </button>
@@ -532,12 +588,12 @@
 </section>
 
 <!-- ============ GLOBAL ============ -->
-<section class="mod" id="m9">
+<section class="mod" id="replay-all">
   <p class="tag">Global</p>
   <h2>Replay Everything</h2>
   <div class="demo">
     <div class="replaybar bare">
-      <button class="replay accent" data-replay="all">
+      <button type="button" class="replay accent" data-replay="all">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
         Replay all fifteen effects
       </button>
@@ -556,15 +612,15 @@
 
 
 <!-- ============ BACK TO TOP ============ -->
-<div class="btt-wrap" id="bttWrap" aria-hidden="true">
-  <button class="btt" id="btt" aria-label="Back to The Structural Frame">
+<div class="btt-wrap" id="bttWrap">
+  <button type="button" class="btt" id="btt" aria-label="Back to The Structural Frame">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
       <path d="M12 19V5M5 12l7-7 7 7"/>
     </svg>
     <span class="btt-ring" aria-hidden="true"></span>
   </button>
   <span class="btt-tip">The Structural Frame</span>
-  <button class="btt-mini" id="bttTop" aria-label="Back to page top">top</button>
+  <button type="button" class="btt-mini" id="bttTop" aria-label="Back to page top">top</button>
 </div>
 
 
