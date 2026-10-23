@@ -119,10 +119,40 @@ const barsEl = $('#bars');
 const vals = [18, 27, 33, 29, 41, 52, 47, 63, 71, 68, 84, 92];
 
 barsEl.innerHTML = vals.map(v =>
-  `<button type="button" class="bar" data-v="${v}% — hover reveals detail" aria-label="${v} percent"></button>`
+  `<button type="button" class="bar" data-v="${v}% — tap or focus for detail" aria-label="${v} percent"></button>`
 ).join('');
 
+function positionBarTooltips() {
+  const card = barsEl.closest('.demo') || document.body;
+  const cardRect = card.getBoundingClientRect();
+  const safeLeft = Math.max(8, cardRect.left + 8);
+  const safeRight = Math.min(innerWidth - 8, cardRect.right - 8);
+  const measurer = Object.assign(document.createElement('span'), { className:'bar-tip-measure' });
+  document.body.append(measurer);
+
+  [...barsEl.children].forEach(bar => {
+    measurer.textContent = bar.dataset.v || '';
+    measurer.style.width = 'max-content';
+    const natural = Math.ceil(measurer.getBoundingClientRect().width);
+    const maxW = Math.max(112, Math.min(210, safeRight - safeLeft));
+    const width = Math.max(112, Math.min(natural, maxW));
+    measurer.style.width = `${width}px`;
+
+    const r = bar.getBoundingClientRect();
+    const center = r.left + r.width / 2;
+    const wantedLeft = center - width / 2;
+    const clampedLeft = Math.max(safeLeft, Math.min(wantedLeft, safeRight - width));
+    const offset = Math.round(clampedLeft - wantedLeft);
+
+    bar.style.setProperty('--bar-tip-w', `${width}px`);
+    bar.style.setProperty('--bar-tip-x', `${offset}px`);
+  });
+
+  measurer.remove();
+}
+
 function growBars() {
+  positionBarTooltips();
   [...barsEl.children].forEach((b, i) => {
     b.style.height = '0%';
     setTimeout(() => { b.style.height = vals[i] + '%'; }, RM ? 0 : 60 + i * 55);
@@ -134,6 +164,9 @@ new IntersectionObserver((entries, obs) => entries.forEach(e => {
 }), { threshold: .4 }).observe(barsEl);
 
 REPLAY.bars = growBars;
+addEventListener('resize', positionBarTooltips);
+addEventListener('orientationchange', positionBarTooltips);
+positionBarTooltips();
 
 
 /* ============ 04 — YOU DRAW IT ============ */
@@ -301,18 +334,25 @@ seed();
 function sizeOrbs() {
   const r = orbs.getBoundingClientRect();
   orbs.width  = r.width * devicePixelRatio;
-  orbs.height = 280 * devicePixelRatio;
+  orbs.height = r.height * devicePixelRatio;
   oc.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
-  OW = r.width; OH = 280;
+  OW = r.width; OH = r.height;
 }
 addEventListener('resize', sizeOrbs);
 sizeOrbs();
 
-orbs.addEventListener('mousemove', e => {
+function setOrbPointer(e) {
   const r = orbs.getBoundingClientRect();
   mouse = { x: e.clientX - r.left, y: e.clientY - r.top };
-});
-orbs.addEventListener('mouseleave', () => { mouse = { x: -999, y: -999 }; });
+}
+
+function clearOrbPointer() {
+  mouse = { x: -999, y: -999 };
+}
+
+orbs.addEventListener('pointermove', setOrbPointer);
+orbs.addEventListener('pointerdown', setOrbPointer);
+orbs.addEventListener('pointerleave', clearOrbPointer);
 
 function tickOrbs() {
   oc.fillStyle = '#0d1117';
@@ -601,7 +641,8 @@ const chart = $('#threadChart');
 chart.innerHTML = KEYS.map((k, i) => {
   const e = ENTS[k];
   const h = e.val * 1.1;
-  return `<rect class="th-el" data-ent="${k}" x="${38 + i * 82}" y="${130 - h}"
+  return `<rect class="th-el" data-ent="${k}" role="button" tabindex="0"
+            aria-label="Highlight ${e.name}" x="${38 + i * 82}" y="${130 - h}"
             width="54" height="${h}" rx="3" fill="${e.color}"/>
           <text x="${65 + i * 82}" y="144" text-anchor="middle"
             font-family="Helvetica Neue" font-size="9" fill="#6b6b6b">${e.name}</text>`;
@@ -614,7 +655,8 @@ map.innerHTML =
    <path d="M0 110 Q 80 88 150 104 T 300 92 L300 150 L0 150Z" fill="#ddd6ca"/>` +
   KEYS.map(k => {
     const e = ENTS[k];
-    return `<circle class="th-el" data-ent="${k}" cx="${e.cx}" cy="${e.cy}"
+    return `<circle class="th-el" data-ent="${k}" role="button" tabindex="0"
+              aria-label="Highlight ${e.name}" cx="${e.cx}" cy="${e.cy}"
               r="${8 + e.val / 14}" fill="${e.color}" fill-opacity=".85"
               stroke="#fff" stroke-width="2"/>`;
   }).join('');
@@ -622,7 +664,8 @@ map.innerHTML =
 /* --- build timeline --- */
 $('#threadTime').innerHTML = KEYS.map(k => {
   const e = ENTS[k];
-  return `<div class="tl-band th-band" data-ent="${k}"
+  return `<div class="tl-band th-band" data-ent="${k}" role="button" tabindex="0"
+            aria-label="Highlight ${e.name}"
             style="background:${e.color}">${e.name}</div>`;
 }).join('');
 
@@ -641,12 +684,25 @@ function clearEntity() {
   allThreaded().forEach(el => el.classList.remove('lit', 'dim'));
 }
 
+function handleThreadKeydown(e) {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  litEntity(e.currentTarget.dataset.ent);
+  e.preventDefault();
+}
+
 allThreaded().forEach(el => {
+  if (el.classList.contains('ent')) {
+    el.tabIndex = 0;
+    el.setAttribute('role', 'button');
+    el.setAttribute('aria-label', `Highlight ${el.textContent.trim()}`);
+  }
+
   el.addEventListener('mouseenter', () => litEntity(el.dataset.ent));
   el.addEventListener('mouseleave', clearEntity);
+  el.addEventListener('pointerdown', () => litEntity(el.dataset.ent));
   el.addEventListener('focus', () => litEntity(el.dataset.ent));
   el.addEventListener('blur', clearEntity);
-  if (el.classList.contains('ent')) el.tabIndex = 0;
+  el.addEventListener('keydown', handleThreadKeydown);
 });
 
 /* --- replay: re-teach each colour in narrative order --- */
@@ -1346,6 +1402,10 @@ function paintLake(ctx, shrink) {
 paintLake($('#baBefore').getContext('2d'), false);
 paintLake($('#baAfter').getContext('2d'), true);
 
+function sizeBAClipLayer() {
+  baClip.style.setProperty('--ba-wrap-w', `${baWrap.getBoundingClientRect().width}px`);
+}
+
 function setBA(p) {
   baPos = Math.max(0, Math.min(100, p));
   baClip.style.width = baPos + '%';
@@ -1389,6 +1449,8 @@ REPLAY.ba = () => {
   baAnim = requestAnimationFrame(step);
 };
 setBA(50);
+sizeBAClipLayer();
+addEventListener('resize', sizeBAClipLayer);
 
 
 /* ============ 14 — AUDIO WAVEFORM ============ */

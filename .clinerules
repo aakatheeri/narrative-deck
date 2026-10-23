@@ -1,13 +1,5 @@
 # narrative-deck — working rules
 
-## Never modify
-- Anything inside `docs/` once moved there. The code is tested.
-- No refactoring, no "improvements", no reformatting.
-
-## Never add
-- Dependencies, package.json, build steps, bundlers, frameworks.
-- This project is vanilla HTML/CSS/JS by design.
-
 ## Word limits — hard
 - SKILL.md: under 500 words
 - Each reference file: under 400 words
@@ -18,3 +10,6 @@
 - `skill/` specifies for agents how to build them.
 - Do not duplicate prose between them.
 
+## Architecture
+- Follow Clean Code and Clean Architecture principles for /docs /templates
+- Consider mobile responsiveness

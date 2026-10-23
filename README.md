@@ -1,8 +1,9 @@
-# narrative-deck
+# Narrative Deck
 
+**Skill/repo slug:** `narrative-deck`  
 **Live demo:** https://aakatheeri.github.io/narrative-deck/
 
-narrative-deck is not a deck generator and does not produce PDF, PPTX, or slide exports; it is a reference page plus implementation patterns for narrative web effects.
+Narrative Deck is not a deck generator and does not produce PDF, PPTX, or slide exports; it is a reference page plus implementation patterns for narrative web effects.
 
 ## I want to understand these effects
 
