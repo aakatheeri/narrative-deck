@@ -18,6 +18,3 @@
 - `skill/` specifies for agents how to build them.
 - Do not duplicate prose between them.
 
-## Placeholders
-- Use YOURNAME for the GitHub username everywhere.
-- Use 2026 as the copyright year.

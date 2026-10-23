@@ -1,9 +1,10 @@
 cff-version: 1.2.0
 type: software
-title: narrative-deck
-message: "If you use this reference, cite it using this metadata."
+title: "Narrative Deck"
+message: "If you use this storytelling skill or reference implementation, cite it using this metadata."
 authors:
-  - family-names: YOURNAME
+  - family-names: "Alkatheeri"
+    given-names: "Ahmed"
 license: MIT
 keywords:
   - storytelling
@@ -11,5 +12,8 @@ keywords:
   - narrative
   - vanilla-javascript
   - scrollytelling
-repository-code: "https://github.com/YOURNAME/narrative-deck"
+  - AI-assisted-development
+repository-code: "https://github.com/aakatheeri/narrative-deck"
+url: "https://aakatheeri.github.io/narrative-deck/"
+abstract: "Narrative Deck is a reusable AI skill and vanilla HTML/CSS/JavaScript reference implementation for building narrative-structured interactive storytelling pages."
 year: 2026
