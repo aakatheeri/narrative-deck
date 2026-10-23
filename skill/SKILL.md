@@ -22,12 +22,13 @@ Nine-beat frame, fifteen effects, three templates. Placement beats spectacle.
 ## Workflow
 
 1. Ask purpose/audience/tone; infer when clear.
-2. Map content to beats — read `references/structure.md`.
-3. Choose **at most three** effects — read `references/placement.md`.
-4. Confirm beats/effects.
-5. Start from `../templates/`.
-6. Implement chosen references.
-7. Run `references/checklist.md`.
+2. Shape story — read `references/story-design.md`.
+3. Map beats — read `references/structure.md`.
+4. Choose **at most three** effects — read `references/placement.md`.
+5. Confirm beats/effects.
+6. Start from `../templates/`.
+7. Implement chosen references.
+8. Run `references/checklist.md`.
 
 ## The Nine Beats
 
