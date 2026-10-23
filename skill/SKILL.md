@@ -17,32 +17,25 @@ templates. Placement matters more than execution.
 
 ## Scope
 
-**Does:** structure a deck around narrative beats; implement scroll,
-canvas, and interaction effects; produce responsive single-file or
-three-file HTML decks.
+**Does:** structure HTML decks; implement scroll/canvas/interaction effects.
 
-**Does not:** write the user's content; export PDF/PPTX; design brand
-systems; evaluate general UX.
+**Does not:** write content; export PDF/PPTX.
 
 ## Workflow
 
-1. Ask what the deck is for and who sees it. Do not skip this.
-2. Map content to the nine beats — read `references/structure.md`.
+1. Ask purpose/audience/tone; infer only when clear.
+2. Map content to beats — read `references/structure.md`.
 3. Choose **at most three** effects — read `references/placement.md`.
-4. Confirm the beat list and effect list with the user before coding.
-5. Start from a template in `../templates/`, not from scratch.
-6. Implement using the per-effect reference files.
-7. Run `references/checklist.md` before declaring done.
+4. Confirm beats/effects.
+5. Start from `../templates/`.
+6. Implement chosen references.
+7. Run `references/checklist.md`.
 
 ## The Nine Beats
 
-Hook → Setup → Inciting Incident → Pinch 1 → Midpoint → Pinch 2 →
-Plot Point 2 → Climax → Resolution
+Hook → Setup → Inciting → Pinch 1 → Midpoint → Pinch 2 → PP2 → Climax → Resolution. See `references/structure.md`.
 
-Full table with positions, jobs, and principles:
-`references/structure.md`
-
-## The Fifteen Effects
+## Effects
 
 | # | Effect | Serves | Reference |
 |---|---|---|---|
@@ -62,32 +55,23 @@ Full table with positions, jobs, and principles:
 | 14 | Audio waveform | Pinch 2 | `references/14-wave.md` |
 | 15 | Paywall simulator | Resolution | `references/15-pw.md` |
 
-Read a reference file only for effects actually being used.
+Read only used effect references.
 
 ## Architecture — Non-Negotiable
 
-1. Read `prefers-reduced-motion` once into a constant. Every animation
-   checks it and jumps to end state.
-2. Triggers use `IntersectionObserver`, not scroll handlers. Where scroll
-   position is genuinely needed, wrap in `requestAnimationFrame` with a
-   `ticking` guard and `{passive:true}`.
-3. Gate canvas loops behind `IntersectionObserver`. Never run more than
-   three simultaneously.
-4. Anything replayable uses WAAPI — `element.animate()` with
-   `fill:'both'`, `cancel()` before re-running. Not CSS class toggles.
-   See `references/anti-patterns.md`.
-5. All colour, type, and easing values come from `:root` custom
-   properties. See `references/tokens.md`.
-6. Hover reveals also fire on `:focus-visible`. Interactive elements are
-   `<button>`, never `<div>`.
-7. Every canvas scales by `devicePixelRatio`.
-8. Arrow keys and space advance slides. Responsive from 360px up.
+1. Read `prefers-reduced-motion` once; animations jump to end.
+2. Use `IntersectionObserver`; scroll math uses rAF + `ticking` + `{passive:true}`.
+3. Gate canvas loops; max three active.
+4. Replay uses WAAPI with `fill:'both'` and `cancel()`.
+5. Tokens follow brand/tone; ask if missing. See `references/tokens.md`.
+6. Hover reveals work on `:focus-visible`; use `<button>`, never `<div>`.
+7. Canvas scales by `devicePixelRatio`.
+8. Arrows/space advance slides; responsive from 360px.
 
 ## Hard Limits
 
-- **Three effects per deck maximum.** Four reads as a showreel.
-- **Never place an effect at the climax.** Spectacle competes with
-  resolution.
+- **Three effects max.** Four reads as showreel.
+- **No climax effects.** Spectacle competes with resolution.
 - **Parallax: six layers maximum.**
 - **Kinetic type: headlines only.** Never body copy.
 - **No dependencies.** No build step, no framework, no package.json.
@@ -97,10 +81,9 @@ Read a reference file only for effects actually being used.
 | File | Shape |
 |---|---|
 | `../templates/pitch.html` | problem → solution → ask |
-| `../templates/explainer.html` | question → mechanism → implication |
-| `../templates/report.html` | finding → evidence → recommendation |
+| `../templates/explainer.html` | question → mechanism |
+| `../templates/report.html` | finding → recommendation |
 
 ## Live Reference
 
-`../docs/index.html` runs all fifteen effects with replay controls.
-Lift working code from there rather than regenerating it.
+`../docs/index.html` runs all effects with replay controls. Lift working code from there.

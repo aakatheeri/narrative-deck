@@ -7,6 +7,7 @@
 - [ ] Canvas scaling: devicePixelRatio is handled before drawing; CSS size and backing store match.
 - [ ] rAF gating: loops are cancelled, paused, or IntersectionObserver-gated when offscreen.
 - [ ] Token usage: colours, type, easing, borders, and radii use shared tokens where possible.
+- [ ] Visual direction: warm paper, white cards, framed media, serif body, rounded sans UI, clear red/blue/amber/mint meaning.
 - [ ] Mobile breakpoints: usable from 360px width; sticky/scrolly stays native or intentionally collapses.
 - [ ] Sticky ancestors are not clipped by `overflow:hidden/clip` or transformed containers.
 - [ ] Tooltips/popovers clamp inside the card and viewport, including first/last items.

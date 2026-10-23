@@ -12,9 +12,9 @@ Build every prose, chart, map, and timeline entity with matching `data-ent`. On 
 ## Implementation
 ```js
 const ENTS = {
-  a: { name: 'Northfield', color: '#c1272d', val: 86 },
-  b: { name: 'Lakeside', color: '#1a6aa8', val: 54 },
-  c: { name: 'Eastgate', color: '#e08c1a', val: 31 }
+  a: { name: 'Northfield', color: 'var(--accent)', val: 86 },
+  b: { name: 'Lakeside', color: 'var(--accent2)', val: 54 },
+  c: { name: 'Eastgate', color: 'var(--accent3)', val: 31 }
 };
 const allThreaded = () => $$('[data-ent]');
 function litEntity(key) {

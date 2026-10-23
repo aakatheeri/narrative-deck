@@ -2,32 +2,44 @@
 
 See live anchors from every effect reference, e.g. [01](../../docs/index.html#m1).
 
+## Visual direction
+Choose tokens from brand, audience, content, and tone. If direction is clear, infer and state the assumption. If missing, ask. If asked to choose, default to restrained editorial. Do not default to edutainment; use warm learning cues only for educational, playful, training, or magazine-like content.
+
+Common modes:
+- Executive: restrained, high-contrast, minimal accent.
+- Investor/product: premium, confident, product-led.
+- Editorial/report: evidence-first, readable, calm.
+- Technical: diagrammatic, precise, system-like.
+- Edutainment: warm paper, cards, friendly feedback.
+
 ## Colour
 | token | controls |
 |---|---|
-| `--ink:#121212` | Primary text, dark buttons, high-contrast UI. |
-| `--paper:#fbfaf8` | Page background and calm reading surface. |
-| `--rule:#e2ddd5` | Borders, separators, inactive dots/cells. |
-| `--accent:#c1272d` | Main narrative emphasis, hot states, alerts. |
-| `--accent2:#1a6aa8` | Secondary emphasis, focus rings, data contrast. |
-| `--muted:#6b6b6b` | Captions, labels, readouts. |
-| `--sand:#f1ece3` | Explanatory panels and quiet fills. |
-| `--ent-a:#c1272d` | Entity A thread colour. |
-| `--ent-b:#1a6aa8` | Entity B thread colour. |
-| `--ent-c:#e08c1a` | Entity C thread colour. |
+| `--ink:#211b16` | Primary text and dark UI. |
+| `--dark:#151719` | Deep media/canvas surfaces. |
+| `--paper:#f7efe2` | Warm page background. |
+| `--card:#fffdf8` | Learning cards and controls. |
+| `--sand:#efe2cf` | Explanation panels and quiet fills. |
+| `--rule:#decfbd` | Borders, separators, inactive dots/cells. |
+| `--accent:#c83b33` | Surprise, reveals, warnings, “actual” lines. |
+| `--accent2:#276f9f` | Explanation, focus rings, contrast data. |
+| `--accent3:#dc9a2e` | Warm feedback and transitional states. |
+| `--mint:#8ebf9f` | Correct/affirming feedback. |
+| `--muted:#75695d` | Captions, labels, readouts. |
+
+Entity threading should alias tokens: `--ent-a:var(--accent)`, `--ent-b:var(--accent2)`, `--ent-c:var(--accent3)`.
 
 ## Type
 | token | controls |
 |---|---|
 | `--serif:"Iowan Old Style","Palatino Linotype",Georgia,serif` | Long-form body voice. |
-| `--sans:"Helvetica Neue",Inter,system-ui,-apple-system,sans-serif` | UI, labels, captions, buttons. |
+| `--sans:"Avenir Next","Nunito Sans","Helvetica Neue",Inter,system-ui,-apple-system,sans-serif` | UI, labels, captions, buttons. |
 
-## Motion
+## Shape, depth, motion
 | token | controls |
 |---|---|
-| `--ease:cubic-bezier(.2,.8,.2,1)` | Shared editorial easing for reveals and transitions. |
-
-## Spacing
-| token | controls |
-|---|---|
-| `--radius:6px` | Shared card and media corner radius. |
+| `--radius:16px` | Cards and large containers. |
+| `--radius-sm:10px` | Media frames, panels, transcript rows. |
+| `--shadow-card` | Soft learning-card elevation. |
+| `--shadow-media` | Framed diagram/specimen surfaces. |
+| `--ease:cubic-bezier(.2,.8,.2,1)` | Editorial reveals and transitions. |

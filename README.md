@@ -52,8 +52,10 @@ npx skills add aakatheeri/narrative-deck --agent claude-code cursor
 Then ask your assistant:
 
 ```text
-Use the narrative-deck skill to turn this material into a nine-beat interactive article.
+Use the narrative-deck skill to turn this material into a nine-beat interactive web presentation.
+If the visual direction is missing, ask me which design mode to use.
 Keep it vanilla HTML/CSS/JS and use no more than three effects.
+Do not default to edutainment unless I ask for it.
 ```
 
 #### Manual install
@@ -86,10 +88,29 @@ narrative-deck/
 
 Useful prompts:
 
-- "Use the narrative-deck skill to turn this report into a nine-beat interactive article outline."
+- "Use the narrative-deck skill to turn this report into a nine-beat interactive article outline. Infer the tone from the audience and content."
 - "Use effect 04 at the Midpoint and effect 13 at the Inciting Incident; keep everything vanilla HTML/CSS/JS."
 - "Read `placement.md` and suggest only effects that fit a pitch deck's problem → solution → ask arc."
 - "Build from `templates/explainer.html`, wiring no more than three effects."
+- "Create a restrained executive briefing. Do not use edutainment styling."
+- "Create a premium investor pitch with a confident product-led look."
+- "Create an evidence-led editorial investigation."
+- "Create a precise technical explainer with diagrammatic interactions."
+- "Create a warm edutainment learning module."
+
+### Style is content-led
+
+Narrative Deck does not require an edutainment look. If the user provides a brand, design system, or visual direction, tailor the deck to it. If the user gives a clear use case or audience, infer the mode and state the assumption. If visual direction is missing, ask one short follow-up question before building.
+
+Ask: "What visual direction should this use?"
+
+- Restrained executive briefing
+- Premium investor/product pitch
+- Evidence-led editorial/report
+- Technical diagrammatic explainer
+- Warm edutainment/learning module
+
+If the user asks the assistant to choose, default to a restrained editorial web presentation. Effects should be tailored to the content's narrative job, not applied as decoration.
 
 Avoid prompts:
 
@@ -98,21 +119,8 @@ Avoid prompts:
 - "Convert this to PowerPoint/PDF." This project is not a deck exporter.
 - "Use React/GSAP/Tailwind." The implementation is dependency-free vanilla code.
 
-### Non-negotiables
+### Output expectations
 
-- Keep `docs/` read-only once moved.
-- Vanilla HTML/CSS/JS only.
-- Reduced-motion awareness for every animation.
-- Keyboard parity for interactive elements.
-- Canvas work must account for devicePixelRatio when precision matters.
-- Replay must reset state without fighting observers.
-
-### Hard limits
-
-- No dependencies.
-- No package.json.
-- No bundlers or build step.
-- `skill/SKILL.md` stays user-supplied.
-- Each reference file stays under 400 words.
+Narrative Deck outputs dependency-free vanilla HTML/CSS/JS. Generated decks should be responsive, keyboard-accessible, reduced-motion aware, and use no more than three effects unless the user explicitly changes the constraint.
 
 MIT licensed, copyright 2026 Ahmed Alkatheeri.

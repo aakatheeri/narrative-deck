@@ -14,6 +14,15 @@ const $$ = (s, root = document) => [...root.querySelectorAll(s)];
 /* Module registry — each effect assigns its reset here. */
 const REPLAY = {};
 
+const cssVar = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+const TONE = {
+  ink: cssVar('--ink') || '#211b16',
+  accent: cssVar('--accent') || '#c83b33',
+  accent2: cssVar('--accent2') || '#276f9f',
+  accent3: cssVar('--accent3') || '#dc9a2e',
+  sans: cssVar('--sans') || 'system-ui, sans-serif'
+};
+
 /* Removing and re-adding a class in the same frame is a no-op:
    the browser batches both into one style recalc. Reading
    offsetWidth forces a synchronous layout flush between them,
@@ -207,7 +216,7 @@ function paintDraw() {
   dc.fillStyle = 'rgba(26,106,168,.05)';
   dc.fillRect(px(SPLIT), 10, W - 20 - px(SPLIT), H - 44);
 
-  dc.strokeStyle = '#1a1a1a'; dc.lineWidth = 2.5;
+  dc.strokeStyle = TONE.ink; dc.lineWidth = 2.5;
   dc.beginPath();
   for (let t = 0; t <= SPLIT; t += .01) {
     const x = px(t), y = py(actual(t));
@@ -215,24 +224,24 @@ function paintDraw() {
   }
   dc.stroke();
 
-  dc.fillStyle = '#1a1a1a';
+  dc.fillStyle = TONE.ink;
   dc.beginPath(); dc.arc(px(SPLIT), py(actual(SPLIT)), 4.5, 0, Math.PI * 2); dc.fill();
 
   if (!userPts.length && !revealed) {
-    dc.fillStyle = '#1a6aa8';
-    dc.font = '13px Helvetica Neue, sans-serif';
+    dc.fillStyle = TONE.accent2;
+    dc.font = `13px ${TONE.sans}`;
     dc.fillText('↳ drag across this zone to predict', px(SPLIT) + 12, 34);
   }
 
   if (userPts.length) {
-    dc.strokeStyle = '#1a6aa8'; dc.lineWidth = 3; dc.setLineDash([]);
+    dc.strokeStyle = TONE.accent2; dc.lineWidth = 3; dc.setLineDash([]);
     dc.beginPath();
     userPts.forEach((p, i) => i ? dc.lineTo(p.x, p.y) : dc.moveTo(p.x, p.y));
     dc.stroke();
   }
 
   if (revealed) {
-    dc.strokeStyle = '#c1272d'; dc.lineWidth = 2.5; dc.setLineDash([6, 5]);
+    dc.strokeStyle = TONE.accent; dc.lineWidth = 2.5; dc.setLineDash([6, 5]);
     dc.beginPath();
     for (let t = SPLIT; t <= 1; t += .01) {
       const x = px(t), y = py(actual(t));
@@ -240,8 +249,8 @@ function paintDraw() {
     }
     dc.stroke(); dc.setLineDash([]);
 
-    dc.fillStyle = '#c1272d';
-    dc.font = '12px Helvetica Neue, sans-serif';
+    dc.fillStyle = TONE.accent;
+    dc.font = `12px ${TONE.sans}`;
     dc.fillText('actual', px(1) - 46, py(actual(1)) - 12);
   }
 }
@@ -629,9 +638,9 @@ REPLAY.parallax = () => {
 /* ============ 09 — COLOR THREADING ============ */
 
 const ENTS = {
-  a: { name: 'Northfield', color: '#c1272d', val: 86, cx: 72,  cy: 52 },
-  b: { name: 'Lakeside',   color: '#1a6aa8', val: 54, cx: 168, cy: 94 },
-  c: { name: 'Eastgate',   color: '#e08c1a', val: 31, cx: 236, cy: 46 }
+  a: { name: 'Northfield', color: TONE.accent, val: 86, cx: 72,  cy: 52 },
+  b: { name: 'Lakeside',   color: TONE.accent2, val: 54, cx: 168, cy: 94 },
+  c: { name: 'Eastgate',   color: TONE.accent3, val: 31, cx: 236, cy: 46 }
 };
 
 const KEYS = Object.keys(ENTS);
@@ -886,7 +895,7 @@ function drawProc() {
   }
 
   /* Gates */
-  [[0.18,'#c1272d'],[0.52,'#1a6aa8'],[0.86,'#c1272d']].forEach(([gt, col]) => {
+  [[0.18,TONE.accent],[0.52,TONE.accent2],[0.86,TONE.accent]].forEach(([gt, col]) => {
     const p = pathAt(gt);
     pc.strokeStyle = col; pc.lineWidth = 3;
     pc.beginPath(); pc.moveTo(p.x, p.y - 58); pc.lineTo(p.x, p.y + 14); pc.stroke();
