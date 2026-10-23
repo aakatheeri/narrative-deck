@@ -1,29 +1,27 @@
 ---
 name: narrative-deck
 description: >-
-  Builds narrative-structured web presentations — a nine-beat story frame
-  plus fifteen editorial effects, in pure HTML/CSS/JS with zero
-  dependencies, responsive from phone to projector. Use when the user asks
-  for a deck, slides, a pitch, a presentation, a talk, or a scroll-driven
-  story page; or when they say "make it feel premium", "like a NYT story",
-  "editorial", "scrollytelling", or "interactive presentation".
+  AI-agent skill for narrative interactive web presentations, pitch decks,
+  explainers, reports, and scrollytelling pages in vanilla HTML/CSS/JS.
+  Uses a nine-beat story frame and editorial effects to help assistants
+  structure content, choose interactions, and produce responsive,
+  dependency-free decks.
 license: MIT
 ---
 
 # Narrative Deck
 
-Nine-beat story frame, fifteen implemented effects, three starting
-templates. Placement matters more than execution.
+Nine-beat frame, fifteen effects, three templates. Placement beats spectacle.
 
 ## Scope
 
-**Does:** structure HTML decks; implement scroll/canvas/interaction effects.
+**Does:** structure HTML decks; implement scroll/canvas effects.
 
 **Does not:** write content; export PDF/PPTX.
 
 ## Workflow
 
-1. Ask purpose/audience/tone; infer only when clear.
+1. Ask purpose/audience/tone; infer when clear.
 2. Map content to beats — read `references/structure.md`.
 3. Choose **at most three** effects — read `references/placement.md`.
 4. Confirm beats/effects.

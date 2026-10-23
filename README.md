@@ -1,9 +1,36 @@
 # Narrative Deck
 
-**Skill/repo slug:** `narrative-deck`  
 **Live demo:** https://aakatheeri.github.io/narrative-deck/
+**Skill/repo slug:** `narrative-deck`
 
-Narrative Deck is not a deck generator and does not produce PDF, PPTX, or slide exports; it is a reference page plus implementation patterns for narrative web effects.
+**AI-agent skill for story-structured interactive web presentations.**
+
+Narrative Deck helps assistants turn raw material into responsive, dependency-free HTML/CSS/JS decks, explainers, reports, scrollytelling pages, and pitch presentations. It combines a nine-beat narrative frame with editorial interaction effects, then guides the assistant to choose only the effects that fit the content.
+
+This is a skill/reference repo, not an npm package. Install it with a skill installer or copy `skill/` into your assistant's skill/context folder.
+
+## What it builds
+
+- Interactive web presentations
+- Pitch decks and investor narratives
+- Executive briefings
+- Product and technical explainers
+- Editorial scrollytelling articles
+- Research/report presentations
+- Training or edutainment modules
+
+## Why use it
+
+- Story-first nine-beat structure.
+- Effects chosen by narrative purpose, not decoration.
+- Dependency-free vanilla HTML/CSS/JS output.
+- Responsive from phone to projector.
+- Reduced-motion and keyboard-accessibility rules.
+- Visual direction adapts to audience, content, and tone.
+
+## Works with
+
+Claude Code, Cursor, Codex, Cline, or any assistant that can load `skill/SKILL.md` and nearby reference files.
 
 ## I want to understand these effects
 
