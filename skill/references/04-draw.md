@@ -3,6 +3,8 @@
 ## When to use
 Use at the Midpoint when the reader has enough context to make a prediction. The beat turns passive reading into commitment.
 
+Hook: prediction creates stakes; the reveal matters because the reader has already taken a position.
+
 ## When NOT to use
 Do not ask too early; an uninformed guess is noise, not investment.
 

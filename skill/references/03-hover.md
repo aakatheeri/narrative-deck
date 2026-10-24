@@ -3,6 +3,8 @@
 ## When to use
 Use at the Inciting Incident for secondary detail behind a strong visible fact. It lets the finding land first and the specifics appear on inspection.
 
+Hook: curiosity is paid off on demand, letting interested readers increase density without burdening everyone.
+
 ## When NOT to use
 Do not hide critical facts behind hover on mobile or keyboard-hostile elements.
 

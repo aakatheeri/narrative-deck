@@ -3,6 +3,8 @@
 ## When to use
 Use at Pinch Point 1 to reveal pressure or at Plot Point 2 to reconstruct evidence already introduced. It makes inspection feel controlled.
 
+Hook: inspection casts the reader as investigator, making the conclusion feel earned rather than asserted.
+
 ## When NOT to use
 Do not introduce brand-new evidence after Plot Point 2; it reads like a late save.
 

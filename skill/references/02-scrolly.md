@@ -3,6 +3,8 @@
 ## When to use
 Use at Pinch Point 1 when the reader must keep looking at one object while its meaning changes. Best for maps, documents, product shots, or charts that need staged attention.
 
+Hook: one stable object accumulates meaning, so each step feels like discovery rather than a new slide.
+
 ## When NOT to use
 Do not open with it; it asks for scrolling before the reader knows why to care. Do not use it for decoration only.
 

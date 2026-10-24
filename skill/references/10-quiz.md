@@ -3,6 +3,8 @@
 ## When to use
 Use at Midpoint for light commitment or at Resolution for recall. The beat works because binary taps feel cheaper than form fields.
 
+Hook: low-friction choices accumulate investment, making the reader want the result or recap.
+
 ## When NOT to use
 Do not use when the answer requires nuance; yes/no can flatten trust.
 

@@ -3,6 +3,8 @@
 ## When to use
 Use at Pinch Point 2 when voice, silence, or timing adds pressure. Transcript sync keeps the effect accessible.
 
+Hook: visible timing makes audio skimmable while preserving the pressure of voice and silence.
+
 ## When NOT to use
 Do not use audio without text; silent environments and assistive tech need the transcript.
 

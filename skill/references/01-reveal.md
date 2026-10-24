@@ -3,6 +3,8 @@
 ## When to use
 Use when setup must feel paced rather than dumped. It serves the Setup beat by rewarding scroll with one clean arrival at a time.
 
+Hook: controlled arrival turns scroll into a small reward loop, keeping setup from feeling like exposition.
+
 ## When NOT to use
 Do not use for climax copy or replay by CSS class toggling; observer-owned state and replay state will fight.
 

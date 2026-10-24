@@ -3,6 +3,8 @@
 ## When to use
 Use in Setup to teach recurring entities, then at Plot Point 2 to reconnect them. It helps readers track who is who across formats.
 
+Hook: repeated recognition rewards memory and makes separate modules feel intentionally connected.
+
 ## When NOT to use
 Do not use when the story has only one meaningful entity or colour cannot survive accessibility checks.
 

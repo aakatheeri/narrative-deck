@@ -3,6 +3,8 @@
 ## When to use
 Use sparingly as ambient setup texture or a rest between heavier modules. It creates curiosity without carrying evidence.
 
+Hook: responsive motion signals aliveness and gives the reader a light reset between evidence beats.
+
 ## When NOT to use
 Do not use for precise data or essential claims; the field is decorative and pointer-led.
 

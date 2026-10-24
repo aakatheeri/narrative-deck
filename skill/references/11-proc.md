@@ -3,6 +3,8 @@
 ## When to use
 Use at Pinch Point 2 when pressure comes from sequence. It shows how a process becomes harder over time.
 
+Hook: phased motion turns hidden expertise or escalation into something the reader can follow.
+
 ## When NOT to use
 Do not use for static comparisons; a procedural graphic needs phases and motion.
 

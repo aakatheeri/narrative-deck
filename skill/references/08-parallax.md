@@ -3,6 +3,8 @@
 ## When to use
 Use at the Hook to create depth before the argument begins. It should frame entry, not carry evidence.
 
+Hook: immediate depth implies craft and scale, buying attention before the first evidence beat.
+
 ## When NOT to use
 Avoid around dense text, charts, or users likely to prefer reduced motion.
 

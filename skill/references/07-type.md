@@ -3,6 +3,8 @@
 ## When to use
 Use in the Hook or just before Climax when a phrase needs memorability. Keep it short and let prose carry the resolution.
 
+Hook: motion gives a short phrase event status, making the eye commit before the argument begins.
+
 ## When NOT to use
 Do not animate long paragraphs; character motion becomes illegible and delays comprehension.
 
