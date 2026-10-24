@@ -150,4 +150,3 @@ Avoid prompts:
 
 Narrative Deck outputs dependency-free vanilla HTML/CSS/JS. Generated decks should be responsive, keyboard-accessible, reduced-motion aware, and use no more than three effects unless the user explicitly changes the constraint.
 
-MIT licensed, copyright 2026 Ahmed Alkatheeri.
